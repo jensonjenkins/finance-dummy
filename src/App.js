@@ -1,24 +1,36 @@
-import logo from './logo.svg';
+import Navbar from './components/Navbar';
+import Topside from './components/Topside';
+import MainD from './data/MainD';
+import LineChart from './trial/LineChart';
+import { UserData } from './trial/Data';
+import { useState } from 'react';
 import './App.css';
+import Axios from 'axios';
 
 function App() {
+  
+  const [userData, setUserData] = useState({
+    labels: UserData.map((data) => data.year),
+    datasets: [
+      {
+        label: "Users Gained",
+        data: UserData.map((data) => data.userGain),
+        backgroundColor: [
+          "rgba(75,192,192,1)",
+        ],
+        borderColor: 'rgb(75, 192, 192)',
+        tension: 0.2,
+        borderWidth: 1,
+      },
+    ],
+  });
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar />
+      <Topside></Topside>
+      <MainD></MainD>
+      <LineChart chartData={userData} />
+    </>
   );
 }
 
