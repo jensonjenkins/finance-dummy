@@ -1,6 +1,7 @@
 import Navbar from './components/Navbar';
 import Topside from './components/Topside';
 import MainD from './data/MainD';
+import YahooData from './data/YahooData';
 import { Line } from "react-chartjs-2";
 import { useState } from 'react';
 
@@ -13,6 +14,7 @@ function App() {
       <Navbar />
       <Topside></Topside>
       <MainD></MainD>
+      <YahooData></YahooData>
       {/* <Line data = {graph}/> */}
 
     </>

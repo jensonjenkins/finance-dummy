@@ -5,45 +5,34 @@ import { Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import Plot from 'react-plotly.js';
 
-export const getStaticProps = async()=> {
+export const getStaticProps = async () => {
 
 }
 const MainD = () => {
+    let timeInterval = "60"
     let StockSymbol = "AMZN";
     let API_KEY = "KHM0G6B8QHEQ0A02"
 
     const [getValueX, setGetValueX] = useState([])
     const [getValueY, setGetValueY] = useState([])
-    const [dummy, setDummy] = useState('')
 
-    useEffect(()=>{
-        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=5min&outputsize=full&apikey=${API_KEY}`).then((response) => {
-            let DummyVal = [];
-            for (var key in response.data['Time Series (5min)']) {
-                DummyVal.push(parseFloat(response.data['Time Series (5min)'][key]['1. open']))
-                
-            }
-            setDummy(DummyVal) 
-        })
-    }, [dummy])
-
-    useEffect(()=>{
-        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=5min&outputsize=full&apikey=${API_KEY}`).then((response) => {
+    useEffect(() => {
+        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
             let FinalYValues = [];
-            for (var key in response.data['Time Series (5min)']) {
-                FinalYValues.push(parseFloat(response.data['Time Series (5min)'][key]['1. open']))
-                
+            for (var key in response.data[`Time Series (${timeInterval}min)`]) {
+                FinalYValues.push(parseFloat(response.data[`Time Series (${timeInterval}min)`][key]['1. open']))
+                // console.log(response)
             }
-            setGetValueY(FinalYValues) 
+            setGetValueY(FinalYValues)
         })
 
     }, [])
-        
-    useEffect(()=>{
 
-        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=5min&outputsize=full&apikey=${API_KEY}`).then((response) => {
+    useEffect(() => {
+
+        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
             let FinalXValues = [];
-            for (var key in response.data['Time Series (5min)']) {
+            for (var key in response.data[`Time Series (${timeInterval}min)`]) {
                 FinalXValues.push(key);
 
             }
@@ -52,24 +41,44 @@ const MainD = () => {
 
     }, [])
 
-    console.log(getValueX)
+
     console.log(getValueY)
 
     return (
-        <>
+        <div className="graph">
             <Plot
                 data={[
                     {
                         x: getValueX,
                         y: getValueY,
                         type: 'scatter',
-                        mode: 'lines+markers',
+                        mode: 'lines',
                         marker: { color: 'rgb(75, 192, 192)' },
 
                     }
                 ]}
-                layout={{ width: 720, height: 440 }} />
-        </>
+                layout={{ 
+                    autorange: true,
+                    width: 720, 
+                    height: 440 , 
+                    rangeselector: {buttons: [
+                        {
+                          count: 1,
+                          label: '1m',
+                          step: 'month',
+                          stepmode: 'backward'
+                        },
+                        {
+                          count: 6,
+                          label: '6m',
+                          step: 'month',
+                          stepmode: 'backward'
+                        },
+                        {step: 'all'}
+                      ]},
+                      rangeslider: {range: ['2015-02-17', '2017-02-16']},
+                    title:`${StockSymbol}`}} />
+        </div>
     )
 };
 
