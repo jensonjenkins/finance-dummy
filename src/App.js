@@ -13,7 +13,7 @@ function App() {
     <>
       <Navbar />
       <Topside></Topside>
-      <MainD></MainD>
+      {/* <MainD></MainD> */}
       <YahooData></YahooData>
       {/* <Line data = {graph}/> */}
 

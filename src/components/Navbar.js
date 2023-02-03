@@ -24,7 +24,7 @@ const Navbar = () => {
                 <h1 className='TitleText'>Finance Dummy</h1>
             </div>
 
-            <a className={`clickOut${show}`} onClick={ChangeState}></a>
+            <a className={`clickOut${show}`} onClick={ChangeState} onScroll={ChangeState}></a>
 
             <div className={`MenuContainer${show}`}>
                 <div className='MenuLogo'>
@@ -32,11 +32,11 @@ const Navbar = () => {
                 </div>
 
                 <a className='HTLink'>
-                    <AiOutlineStock size={23} className='icon'/>
+                    <AiOutlineStock size={23} className='icon' />
                     <p className='MenuText'> Home</p>
                 </a>
                 <a className='HTLink'>
-                    <MdManageSearch size={23} className='icon'/>
+                    <MdManageSearch size={23} className='icon' />
                     <p className='MenuText'> Explore Trends</p>
                 </a>
 

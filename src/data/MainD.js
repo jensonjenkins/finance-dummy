@@ -10,7 +10,7 @@ export const getStaticProps = async () => {
 }
 const MainD = () => {
     let timeInterval = "60"
-    let StockSymbol = "AMZN";
+    let StockSymbol = "AAPL";
     let API_KEY = "KHM0G6B8QHEQ0A02"
 
     const [getValueX, setGetValueX] = useState([])
@@ -57,27 +57,31 @@ const MainD = () => {
 
                     }
                 ]}
-                layout={{ 
+                layout={{
                     autorange: true,
-                    width: 720, 
-                    height: 440 , 
-                    rangeselector: {buttons: [
-                        {
-                          count: 1,
-                          label: '1m',
-                          step: 'month',
-                          stepmode: 'backward'
-                        },
-                        {
-                          count: 6,
-                          label: '6m',
-                          step: 'month',
-                          stepmode: 'backward'
-                        },
-                        {step: 'all'}
-                      ]},
-                      rangeslider: {range: ['2015-02-17', '2017-02-16']},
-                    title:`${StockSymbol}`}} />
+                    width: 720,
+                    height: 440,
+                    rangeselector: {
+                        buttons: [
+                            {
+                                count: 1,
+                                label: '1m',
+                                step: 'month',
+                                stepmode: 'backward'
+                            },
+                            {
+                                count: 6,
+                                label: '6m',
+                                step: 'month',
+                                stepmode: 'backward'
+                            },
+                            { step: 'all' }
+                        ]
+                    },
+                    rangeslider: { range: ['2015-02-17', '2017-02-16'] },
+                    title: `${StockSymbol}`
+                }}
+                config={{ displayModeBar: false }} />
         </div>
     )
 };
