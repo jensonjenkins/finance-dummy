@@ -6,7 +6,7 @@ import Plot from 'react-plotly.js';
 
 const YahooData = () => {
     let timeInterval = "60"
-    let StockSymbol = "AAPL";
+    let StockSymbol = "NVDA";
     let API_KEY = "KHM0G6B8QHEQ0A02"
 
     const [getValueX, setGetValueX] = useState([])
@@ -17,7 +17,7 @@ const YahooData = () => {
             let FinalYValues = [];
             for (var key in response.data[`Monthly Time Series`]) {
                 FinalYValues.push(parseFloat(response.data[`Monthly Time Series`][key]['1. open']))
-                console.log(response)
+                // console.log(response)
             }
             setGetValueY(FinalYValues)
         })
@@ -37,7 +37,7 @@ const YahooData = () => {
 
     }, [])
 
-    console.log(getValueY)
+    // console.log(getValueY)
 
     return (
         <div className="graph">

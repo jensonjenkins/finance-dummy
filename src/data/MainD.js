@@ -42,7 +42,7 @@ const MainD = () => {
     }, [])
 
 
-    console.log(getValueY)
+    // console.log(getValueY)
 
     return (
         <div className="graph">
