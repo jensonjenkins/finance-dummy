@@ -6,7 +6,7 @@ import Plot from 'react-plotly.js';
 
 const YahooData = () => {
     let timeInterval = "60"
-    let StockSymbol = "IBM";
+    let StockSymbol = "AAPL";
     let API_KEY = "KHM0G6B8QHEQ0A02"
 
     const [getValueX, setGetValueX] = useState([])
