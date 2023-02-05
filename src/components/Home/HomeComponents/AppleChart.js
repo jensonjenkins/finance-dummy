@@ -1,9 +1,8 @@
 import Axios from "axios"
 import { useState, useEffect } from "react"
-import './ChartjsDemo.css'
+import './AppleChart.css'
 import 'chartjs-adapter-date-fns';
 import { Line } from "react-chartjs-2";
-import ErrorBoundary from "../ErrorHandling/ErrorBoundary";
 import {CategoryScale, Chart} from 'chart.js/auto'; 
 
 
@@ -11,8 +10,8 @@ Chart.register(CategoryScale);
 
 
 
-const ChartjsDemo = () => {
-    let timeInterval = "15"
+const AppleChart = () => {
+    let timeInterval = "30"
     let StockSymbol = "AAPL";
     let API_KEY = "KHM0G6B8QHEQ0A02"
     const [data, setUserData] = useState({
@@ -35,14 +34,14 @@ const ChartjsDemo = () => {
             console.log(FinalXValues)
             setUserData({
 
-                labels: FinalXValues.reverse(),
+                labels: FinalXValues.reverse().slice(-50),
                 datasets: [{
-                    data: FinalYValues.reverse(),
+                    data: FinalYValues.reverse().slice(-50),
                     label: `${StockSymbol}`,
-                    tension: 0.6,
+                    tension: 0.5,
                     pointRadius: 0,
                     borderColor: "rgba(36, 105, 240, 1)",
-                    borderWidth: 2.3,
+                    borderWidth: 3.3,
                     fill: {
                         target: 'origin',
                         above: 'rgba(36, 105, 240, 0.13)',
@@ -64,12 +63,15 @@ const ChartjsDemo = () => {
                 intersect: false,
                 yAlign: 'bottom',
             },
+            legend:{
+                display:false
+            }
         },
         scales: {
             x: {
                 type: 'time',
                 time: {
-                    unit: 'month'
+                    unit: 'day'
                 },
                 grid: {
                     display: false
@@ -78,14 +80,17 @@ const ChartjsDemo = () => {
             y:{
                 grid: {
                     color: 'rgba(0, 0, 0, 0.05)'
-                }
-            }
+                },
+                display:false
+            },
+            
         },
+        
     }
     
     return (
         // <ErrorBoundary>
-            <div className="container">
+            <div className="AppleChartcontainer">
                 <Line data={data} options={optionsD} />
             </div>
 /* 
@@ -94,4 +99,4 @@ const ChartjsDemo = () => {
     )
 };
 
-export default ChartjsDemo;
+export default AppleChart;

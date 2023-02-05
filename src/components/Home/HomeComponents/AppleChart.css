@@ -1,0 +1,13 @@
+body{
+    font-family: 'Poppins', sans-serif;
+}
+
+.AppleChartcontainer{
+    position: relative;
+    margin: 0px;
+    width:330px;
+    height:100px;
+    margin-top: 30px;
+    margin-left: -26px;
+
+}

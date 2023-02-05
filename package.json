@@ -9,6 +9,7 @@
     "axios": "^1.2.5",
     "chart.js": "^4.2.0",
     "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-annotation": "^2.1.2",
     "date-fns": "^2.29.3",
     "google-finance": "^0.1.12",
     "plotly.js": "^2.18.0",

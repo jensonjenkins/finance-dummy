@@ -44,10 +44,11 @@ body{
 }
 
 .TitleText{
-    font-weight: 300;
-    color: rgb(104, 104, 104);
+    font-weight: 500;
+    color: rgb(0, 0, 0);
     font-size: 21px;
     margin-left:4px;
+    margin-top: 10px;
 }
 
 .TitleTextMenu{

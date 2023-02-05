@@ -1,23 +1,19 @@
-import Navbar from './components/Navbar';
-import Topside from './components/Topside';
-import MainD from './data/MainD';
-import YahooData from './data/YahooData';
+import Navbar from './components/Navbar/Navbar';
+import Topside from './components/Topside/Topside';
 import ChartjsDemo from './data/ChartjsDemo';
-import { Line } from "react-chartjs-2";
-import { useState } from 'react';
-
+import TimeSeriesMonthly from './data/TimeSeriesMonth'
+import Home from './components/Home/Home';
 import './App.css';
 
 function App() {
-
-
+  
   return (
     <>
       <Navbar />
       <Topside></Topside>
-      {/* <MainD></MainD>
-      <YahooData></YahooData> */}
-      <ChartjsDemo></ChartjsDemo>
+      <Home></Home>
+      {/* <ChartjsDemo></ChartjsDemo>
+      <TimeSeriesMonthly></TimeSeriesMonthly> */}
 
 
     </>

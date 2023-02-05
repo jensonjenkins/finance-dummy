@@ -18,7 +18,7 @@ const Topside = () => {
         <>
             <div className='greyBox'>
                 <a className={`ClickOut${show}`} onClick={ChangeStateTwo}></a>
-                <div className='colWrap'>               
+                <div className={`colWrap${show}`}>               
                     <a className='wrapper' onClick={ChangeStateOne}>
                         <GoSearch className='SearchIcon' size={19} />
                         <input className={`searchBar${show}`} placeholder='Search for stocks, ETFs & more'>
