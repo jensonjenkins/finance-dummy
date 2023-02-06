@@ -1,6 +1,6 @@
 import Axios from "axios"
 import { useState, useEffect } from "react"
-import './AppleChart.css'
+import './PortChart.css'
 import 'chartjs-adapter-date-fns';
 import { Line } from "react-chartjs-2";
 import {CategoryScale, Chart} from 'chart.js/auto'; 
@@ -8,11 +8,9 @@ import {CategoryScale, Chart} from 'chart.js/auto';
 
 Chart.register(CategoryScale);
 
-
-
-const AppleChart = () => {
+const PortChart = (props) => {
     let timeInterval = "30"
-    let StockSymbol = "AAPL";
+    let StockSymbol = props.CompanyType;
     let API_KEY = "KHM0G6B8QHEQ0A02"
     const [data, setUserData] = useState({
         labels: [],
@@ -41,7 +39,7 @@ const AppleChart = () => {
                     tension: 0.5,
                     pointRadius: 0,
                     borderColor: "rgba(36, 105, 240, 1)",
-                    borderWidth: 3.3,
+                    borderWidth: 1.3,
                     fill: {
                         target: 'origin',
                         above: 'rgba(36, 105, 240, 0.13)',
@@ -90,7 +88,7 @@ const AppleChart = () => {
     
     return (
         // <ErrorBoundary>
-            <div className="AppleChartcontainer">
+            <div className="PortChartcontainer">
                 <Line data={data} options={optionsD} />
             </div>
 /* 
@@ -99,4 +97,4 @@ const AppleChart = () => {
     )
 };
 
-export default AppleChart;
+export default PortChart;

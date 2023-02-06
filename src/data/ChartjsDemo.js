@@ -32,7 +32,7 @@ const ChartjsDemo = () => {
                 FinalXValues.push(key);
 
             }
-            console.log(FinalXValues)
+            console.log(FinalYValues)
             setUserData({
 
                 labels: FinalXValues.reverse(),
