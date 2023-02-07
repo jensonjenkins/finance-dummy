@@ -1,4 +1,5 @@
 import './Home.css';
+import React from 'react';
 import { SiIbm } from 'react-icons/si'
 import { ImAppleinc } from 'react-icons/im'
 import ChartjsDemo from '../../data/ChartjsDemo';
@@ -12,8 +13,12 @@ import { useState, useEffect } from 'react';
 const Home = () => {
     let API_KEY = "KHM0G6B8QHEQ0A02";
     let timeInterval = "30"
+    let cache = {};
 
     const getListing = async (StockSymb) => {
+        if (cache[StockSymb]) {
+            return cache[StockSymb];
+          }
         return Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymb}&interval=60min&outputsize=full&apikey=${API_KEY}`)
           .then((response) => {
             if (response.data["Time Series (60min)"]) {
@@ -24,6 +29,7 @@ const Home = () => {
             return null;
           });
       };
+
     const PriceFetch = (props) => {
         const [price, setPrice] = useState("Loading...");
       
@@ -38,9 +44,13 @@ const Home = () => {
         }, []);
 
 
-        return (<div>{parseFloat(price).toFixed(2)}&nbsp;USD</div>)
+        return (
+            <React.Suspense fallback={<div>Loading...</div>}>
+                <div>{parseFloat(price).toFixed(2)}&nbsp;USD</div>
+            </React.Suspense>
+        
+        )
     }
-
 
     return (
         <>
@@ -63,7 +73,7 @@ const Home = () => {
                                     </div>
                                     
                                     </p>
-                                <p className='IBMstats'>+85.32 +0.81% </p>
+                                <p className='IBMstats'>+1.32 +0.81% </p>
                             </div>
                         </div>
 
@@ -78,11 +88,11 @@ const Home = () => {
                                 <div className='DivLinePort' />
 
 
-                                <p className='AppleStatTitle'>IBM</p>
+                                <p className='AppleStatTitle'>NFLX</p>
 
-                                <p className='AppleStatValue'> <PriceFetch symbol = "IBM"/></p>
+                                <p className='AppleStatValue'> <PriceFetch symbol = "NFLX"/></p>
 
-                                <PortChart CompanyType="IBM" />
+                                <PortChart CompanyType="NFLX" />
                             </div>
 
                             <div className='PortContent'>

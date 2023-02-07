@@ -3,15 +3,23 @@ import { useState, useEffect } from "react"
 import './PortChart.css'
 import 'chartjs-adapter-date-fns';
 import { Line } from "react-chartjs-2";
-import {CategoryScale, Chart} from 'chart.js/auto'; 
+import { CategoryScale, Chart } from 'chart.js/auto';
+import React from "react";
+import LRU from 'lru-cache';
 
 
 Chart.register(CategoryScale);
 
 const PortChart = (props) => {
+    const cache = new LRU({
+        max: 800,
+        maxAge: 1000 * 60 * 60
+    });
+
     let timeInterval = "30"
     let StockSymbol = props.CompanyType;
     let API_KEY = "KHM0G6B8QHEQ0A02"
+
     const [data, setUserData] = useState({
         labels: [],
         datasets: [{
@@ -19,40 +27,48 @@ const PortChart = (props) => {
         }]
     })
 
+    const cachedData = cache.get(StockSymbol);
 
-    useEffect(() => {
-        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
-            let FinalYValues = [];
-            let FinalXValues = [];
-            for (var key in response.data[`Time Series (${timeInterval}min)`]) {
-                FinalYValues.push(parseFloat(response.data[`Time Series (${timeInterval}min)`][key]['1. open']))
-                FinalXValues.push(key);
+    const fetchData = () =>{
+       
+            Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
+                let FinalYValues = [];
+                let FinalXValues = [];
+                for (var key in response.data[`Time Series (${timeInterval}min)`]) {
+                    FinalYValues.push(parseFloat(response.data[`Time Series (${timeInterval}min)`][key]['1. open']))
+                    FinalXValues.push(key);
+                }
+                setUserData({
+                    labels: FinalXValues.reverse().slice(-50),
+                    datasets: [{
+                        data: FinalYValues.reverse().slice(-50),
+                        label: `${StockSymbol}`,
+                        tension: 0.5,
+                        pointRadius: 0,
+                        borderColor: "rgba(36, 105, 240, 1)",
+                        borderWidth: 1.3,
+                        fill: {
+                            target: 'origin',
+                            above: 'rgba(36, 105, 240, 0.13)',
+                        },
+                        hoverRadius: 6,
+                    }],
+                });
+                cache.set(StockSymbol, data);
+            });
 
+
+        }
+        useEffect(() => {
+            if (!cachedData) {
+                fetchData();
+            } else {
+                setUserData(cachedData);
             }
-            console.log(FinalYValues)
-            setUserData({
-
-                labels: FinalXValues.reverse().slice(-50),
-                datasets: [{
-                    data: FinalYValues.reverse().slice(-50),
-                    label: `${StockSymbol}`,
-                    tension: 0.5,
-                    pointRadius: 0,
-                    borderColor: "rgba(36, 105, 240, 1)",
-                    borderWidth: 1.3,
-                    fill: {
-                        target: 'origin',
-                        above: 'rgba(36, 105, 240, 0.13)',
-                    },
-                    hoverRadius: 6,
+        }, [cachedData])
+    
 
 
-                }],
-
-            })
-        })
-
-    }, [])
     const optionsD = {
         responsive: true,
         maintainAspectRatio: false,
@@ -61,8 +77,8 @@ const PortChart = (props) => {
                 intersect: false,
                 yAlign: 'bottom',
             },
-            legend:{
-                display:false
+            legend: {
+                display: false
             }
         },
         scales: {
@@ -75,26 +91,25 @@ const PortChart = (props) => {
                     display: false
                 }
             },
-            y:{
+            y: {
                 grid: {
                     color: 'rgba(0, 0, 0, 0.05)'
                 },
-                display:false
+                display: false
             },
-            
+
         },
-        
+
     }
-    
+
     return (
-        // <ErrorBoundary>
+        <React.Suspense fallback={<div>Loading...</div>}>
             <div className="PortChartcontainer">
                 <Line data={data} options={optionsD} />
             </div>
-/* 
-          </ErrorBoundary>   */
+        </React.Suspense>
+
 
     )
 };
-
 export default PortChart;

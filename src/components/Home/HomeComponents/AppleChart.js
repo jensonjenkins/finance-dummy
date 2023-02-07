@@ -4,6 +4,8 @@ import './AppleChart.css'
 import 'chartjs-adapter-date-fns';
 import { Line } from "react-chartjs-2";
 import {CategoryScale, Chart} from 'chart.js/auto'; 
+import React from "react";
+import LRU from 'lru-cache';
 
 
 Chart.register(CategoryScale);
@@ -11,6 +13,11 @@ Chart.register(CategoryScale);
 
 
 const AppleChart = () => {
+    const cache = new LRU({
+        max: 800,
+        maxAge: 1000 * 60 * 60
+    });
+
     let timeInterval = "30"
     let StockSymbol = "AAPL";
     let API_KEY = "KHM0G6B8QHEQ0A02"
@@ -20,9 +27,9 @@ const AppleChart = () => {
             data: []
         }]
     })
+    const cachedData = cache.get(StockSymbol);
 
-
-    useEffect(() => {
+    const fetchData = () =>{
         Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
             let FinalYValues = [];
             let FinalXValues = [];
@@ -52,9 +59,18 @@ const AppleChart = () => {
                 }],
 
             })
+            cache.set(StockSymbol, data);
         })
 
-    }, [])
+    }
+    useEffect(() => {
+        if (!cachedData) {
+            fetchData();
+        } else {
+            setUserData(cachedData);
+        }
+    }, [cachedData])
+
     const optionsD = {
         responsive: true,
         maintainAspectRatio: false,
@@ -89,13 +105,15 @@ const AppleChart = () => {
     }
     
     return (
-        // <ErrorBoundary>
+      
+        <React.Suspense fallback={<div>Loading...</div>}>
             <div className="AppleChartcontainer">
                 <Line data={data} options={optionsD} />
             </div>
-/* 
-          </ErrorBoundary>   */
+        </React.Suspense>
+            
 
+      
     )
 };
 
