@@ -1,9 +1,13 @@
 import './Topside.css';
 import { GoSearch } from 'react-icons/go'
-import { useState } from 'react';
-
+import { useState, useEffect} from 'react';
+import SearchResult from './components/SearchResult';
+import Axios from 'axios';
 const Topside = () => {
     const [show, setShow] = useState(false);
+    const [results, setResults] = useState([]);
+    const [inputValue, setInputValue] = useState('');
+
     const ChangeStateOne = () => {
         if (show === false) {
             setShow(true);
@@ -14,17 +18,44 @@ const Topside = () => {
             setShow(false);
         }
     }
+
+    const fetchResults = async (keyword) => {
+        const response = await Axios.get(
+            `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=KHM0G6B8QHEQ0A02`
+        );
+        setResults(response.data.bestMatches.slice(0, 5));
+    };
+
+    useEffect(() => {
+        if (inputValue) {
+            fetchResults(inputValue);
+        }
+    }, [inputValue]);
+
     return (
         <>
             <div className='greyBox'>
                 <a className={`ClickOut${show}`} onClick={ChangeStateTwo}></a>
-                <div className={`colWrap${show}`}>               
-                    <a className='wrapper' onClick={ChangeStateOne}>
+                <div className={`colWrap${show}`}>
+                    <a className='wrapper' onClick={ChangeStateOne} >
                         <GoSearch className='SearchIcon' size={19} />
-                        <input className={`searchBar${show}`} placeholder='Search for stocks, ETFs & more'>
-                        </input>
+                        <input
+                            className={`searchBar${show}`}
+                            placeholder="Search for stocks, ETFs & more"
+                            onChange={(event) => setInputValue(event.target.value)}
+                        ></input>
                     </a>
                     <div className={`DropDownOptions${show}`}>
+
+                        {results.map(result => (
+                            <SearchResult
+                                key={result["1. symbol"]}
+                                ResName={result["1. symbol"]}
+                                ResSrc={result["2. name"]}
+                                ResVal={result["8. currency"]}
+                                // ResCur={result["7. timezone"]}
+                            />
+                        ))}
                     </div>
                 </div>
             </div>

@@ -1,0 +1,46 @@
+.ResContainer{
+    width: 99.9%;
+    height:20%;
+    /* border:1px solid black; */
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    padding: 10px;
+    padding-top: 13px;
+    padding-bottom: 0px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    max-width: 600px;
+}
+
+.ResContainer:hover{
+    background-color: rgba(240, 240,240, 0.5);
+}
+
+.ResTitle{
+    width: 70%;
+    flex-grow: 0;
+    flex-shrink: 0;
+    /* border: 1px solid red;; */
+}
+.NameResult{
+    font-weight: 500;
+    margin: 0px;
+
+}
+.NameDesc{
+    font-weight: 100;
+    margin-top: 0px;
+}
+.ResPrice{
+    /* border: 1px solid green; */
+    width:30%;
+    height:100%;  
+    display: flex;
+}
+.DivLineResult{
+    width: 100%;
+    margin: 0;
+    border:0.4px solid  rgb(223, 223, 223);
+
+}

@@ -13,7 +13,7 @@ Chart.register(CategoryScale);
 const PortChart = (props) => {
     const cache = new LRU({
         max: 800,
-        maxAge: 1000 * 60 * 60
+        ttl: 1000 * 60 * 60
     });
 
     let timeInterval = "30"
@@ -29,44 +29,44 @@ const PortChart = (props) => {
 
     const cachedData = cache.get(StockSymbol);
 
-    const fetchData = () =>{
-       
-            Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
-                let FinalYValues = [];
-                let FinalXValues = [];
-                for (var key in response.data[`Time Series (${timeInterval}min)`]) {
-                    FinalYValues.push(parseFloat(response.data[`Time Series (${timeInterval}min)`][key]['1. open']))
-                    FinalXValues.push(key);
-                }
-                setUserData({
-                    labels: FinalXValues.reverse().slice(-50),
-                    datasets: [{
-                        data: FinalYValues.reverse().slice(-50),
-                        label: `${StockSymbol}`,
-                        tension: 0.5,
-                        pointRadius: 0,
-                        borderColor: "rgba(36, 105, 240, 1)",
-                        borderWidth: 1.3,
-                        fill: {
-                            target: 'origin',
-                            above: 'rgba(36, 105, 240, 0.13)',
-                        },
-                        hoverRadius: 6,
-                    }],
-                });
-                cache.set(StockSymbol, data);
-            });
+    const fetchData = () => {
 
-
-        }
-        useEffect(() => {
-            if (!cachedData) {
-                fetchData();
-            } else {
-                setUserData(cachedData);
+        Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
+            let FinalYValues = [];
+            let FinalXValues = [];
+            for (var key in response.data[`Time Series (${timeInterval}min)`]) {
+                FinalYValues.push(parseFloat(response.data[`Time Series (${timeInterval}min)`][key]['1. open']))
+                FinalXValues.push(key);
             }
-        }, [cachedData])
-    
+            setUserData({
+                labels: FinalXValues.reverse().slice(-50),
+                datasets: [{
+                    data: FinalYValues.reverse().slice(-50),
+                    label: `${StockSymbol}`,
+                    tension: 0.5,
+                    pointRadius: 0,
+                    borderColor: "rgba(36, 105, 240, 1)",
+                    borderWidth: 1.3,
+                    fill: {
+                        target: 'origin',
+                        above: 'rgba(36, 105, 240, 0.13)',
+                    },
+                    hoverRadius: 6,
+                }],
+            });
+            cache.set(StockSymbol, data);
+        });
+
+
+    }
+    useEffect(() => {
+        if (!cachedData) {
+            fetchData();
+        } else {
+            setUserData(cachedData);
+        }
+    }, [cachedData])
+
 
 
     const optionsD = {

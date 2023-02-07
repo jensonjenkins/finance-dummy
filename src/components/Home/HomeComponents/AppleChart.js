@@ -15,7 +15,7 @@ Chart.register(CategoryScale);
 const AppleChart = () => {
     const cache = new LRU({
         max: 800,
-        maxAge: 1000 * 60 * 60
+        ttl: 1000 * 60 * 60
     });
 
     let timeInterval = "30"
