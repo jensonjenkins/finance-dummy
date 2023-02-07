@@ -56,7 +56,8 @@ const Home = () => {
         <>
             <div className='OutContainer'>
                 <div className='LeftCont'>
-
+                    {/* <p className='LeftText'>Create your personal stock portfolio.</p> 
+                     */}
                 </div>
 
                 <div className='RightCont'>
