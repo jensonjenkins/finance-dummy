@@ -18,7 +18,7 @@ const PortChart = (props) => {
 
     let timeInterval = "30"
     let StockSymbol = props.CompanyType;
-    let API_KEY = "KHM0G6B8QHEQ0A02"
+    let API_KEY = "O155PURV9P9PUH7X"
 
     const [data, setUserData] = useState({
         labels: [],
@@ -34,6 +34,7 @@ const PortChart = (props) => {
         Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${StockSymbol}&interval=${timeInterval}min&outputsize=full&apikey=${API_KEY}`).then((response) => {
             let FinalYValues = [];
             let FinalXValues = [];
+            console.log(response)
             for (var key in response.data[`Time Series (${timeInterval}min)`]) {
                 FinalYValues.push(parseFloat(response.data[`Time Series (${timeInterval}min)`][key]['1. open']))
                 FinalXValues.push(key);

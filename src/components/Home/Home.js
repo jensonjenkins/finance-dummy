@@ -11,7 +11,7 @@ import { useState, useEffect } from 'react';
 
 
 const Home = () => {
-    let API_KEY = "KHM0G6B8QHEQ0A02";
+    let API_KEY = "NEJLFBFPMR2JNCEB";
     let timeInterval = "30"
     let cache = {};
 
