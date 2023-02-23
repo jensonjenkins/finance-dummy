@@ -1,8 +1,7 @@
 import Navbar from './components/Navbar/Navbar';
 import Topside from './components/Topside/Topside';
-import ChartjsDemo from './data/ChartjsDemo';
-import TimeSeriesMonthly from './data/TimeSeriesMonth'
-import Home from './components/Home/Home';
+import Views from './components/View/Views';
+
 import './App.css';
 
 function App() {
@@ -11,9 +10,9 @@ function App() {
     <>
       <Navbar />
       <Topside></Topside>
-      <Home></Home>
-      {/* <ChartjsDemo></ChartjsDemo>
-      <TimeSeriesMonthly></TimeSeriesMonthly> */}
+      <Views></Views>
+      {/* <Home></Home> */}
+
 
 
     </>

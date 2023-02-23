@@ -1,0 +1,76 @@
+
+.TinyContainer{ 
+    width:210px;
+    height:60px;
+    border-radius: 10px;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid RGB(217, 220, 224);
+    background-color: white;
+    box-sizing: border-box; 
+    padding: 9px;
+}
+.TinyContainer:hover{
+    background-color: RGBa(245, 245, 245, 1);
+    cursor: pointer;
+}
+.arrowIcon{
+    margin-top: 2.5px;
+}
+.BsFillArrowUpSquareFillUp{
+    color: RGB(171, 204, 178);
+}
+.BsFillArrowUpSquareFillDown{
+    color: RGB(171, 204, 178);
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+.BsFillArrowDownSquareFillUp {
+    color: RGB(233, 162, 158);
+    opacity: 0;
+    visibility: hidden;
+    display: none;
+}
+.BsFillArrowDownSquareFillDown {
+    color: RGB(233, 162, 158);
+}
+.tinyLeft{
+    padding: 3px;
+    padding-left: 6px;
+    box-sizing: border-box;
+}
+.tinyTitle{
+    margin-top: -2px;
+    margin-bottom: 0px;
+    font-size: 13px;
+    font-weight: 500;
+}
+.tinyPrice{
+    margin-top: 0px;
+    font-size: 13px;
+    color: RGB(100, 100, 100);
+}
+
+
+.tinyStats{
+    flex-direction: row;
+    display: flex;
+
+}
+.tinyChangeUp{
+    color:RGB(20, 116, 52);
+    margin-top: 0px;
+    font-size: 13px;
+    margin-bottom: 2px;
+    padding-left: 30px;
+}
+.tinyChangeDown{
+    color:RGB(197, 34, 31);
+    margin-top: 0px;
+    font-size: 13px;
+    margin-bottom: 2px;
+    padding-left: 30px;
+}

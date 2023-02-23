@@ -1,0 +1,86 @@
+
+.ViewBlock{
+    height: 55px;
+    width: 100%;
+    border-top: 1px solid RGB(231, 234, 237);
+    display: flex;
+    flex-direction: row;
+
+}
+.ViewBlock:hover{
+    background-color:RGBa(245, 245, 245, 1);
+}
+.NameTag{
+    height:25px;
+    width: 60px;;
+    vertical-align: middle;
+    margin-top: auto;
+    margin-bottom: auto;
+    background-color:RGBa(31, 115, 232, 0.7);
+    border-radius: 5px;
+    box-sizing: border-box;
+    padding-top: 3.5px;
+    justify-content: center;
+    display: flex;
+    
+}
+.BlockTag{
+    width: 40%;
+    font-size: 15px;
+    padding-left: 15px;
+    font-weight: 100;
+    box-sizing: border-box;
+    /* border: 1px solid black; */
+}
+.BlockPrice{
+    /* border: 1px solid black; */
+    width: 15%;
+}
+.TagLetters{
+    font-size: 12px;
+    font-weight: 500;
+    margin: 0px;
+    color: white;
+}
+.BlockPercChangeUp{
+    /* border: 1px solid black; */
+    width: 15%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    background-color: RGB(230, 244, 234);
+    padding-top: 0px;
+}
+.BlockChangeUp{
+    color: RGB(34, 119, 59);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.BlockChangeActUp{
+    color: RGB(34, 119, 59);
+}
+.BlockChangeDown{
+    color: RGB(171, 36, 34);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.BlockChangeActDown{
+    color: RGB(171, 36, 34);
+}
+.BlockPercChangeDown{
+    /* border: 1px solid black; */
+    width: 15%;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    border-radius: 6px;
+    margin-top: auto;
+    margin-bottom: auto;
+    vertical-align: middle;
+    background-color: RGB(252, 232, 230);
+    padding-top: 0px;
+}

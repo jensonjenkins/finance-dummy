@@ -1,8 +1,10 @@
 import './Topside.css';
 import { GoSearch } from 'react-icons/go'
-import { useState, useEffect} from 'react';
-import SearchResult from './components/SearchResult';
+import { useState, useEffect } from 'react';
+import SearchResult from './components/SearchResult/SearchResult';
 import Axios from 'axios';
+import HeaderContent from './components/HeaderContent/HeaderContent';
+
 const Topside = () => {
     const [show, setShow] = useState(false);
     const [results, setResults] = useState([]);
@@ -23,7 +25,7 @@ const Topside = () => {
         const response = await Axios.get(
             `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=KHM0G6B8QHEQ0A02`
         );
-        setResults(response.data.bestMatches.slice(0, 5));
+        setResults(response.data.bestMatches.slice(0, 4));
     };
 
     useEffect(() => {
@@ -35,6 +37,17 @@ const Topside = () => {
     return (
         <>
             <div className='greyBox'>
+                <div className='Heads'>
+
+                <HeaderContent Condition ="Up"/>
+                <HeaderContent Condition ="Down"/>
+                <HeaderContent Condition ="Down"/>
+                <HeaderContent Condition ="Up"/>
+                <HeaderContent Condition ="Down"/>
+
+
+
+                </div>
                 <a className={`ClickOut${show}`} onClick={ChangeStateTwo}></a>
                 <div className={`colWrap${show}`}>
                     <a className='wrapper' onClick={ChangeStateOne} >
@@ -45,6 +58,7 @@ const Topside = () => {
                             onChange={(event) => setInputValue(event.target.value)}
                         ></input>
                     </a>
+
                     <div className={`DropDownOptions${show}`}>
 
                         {results.map(result => (
@@ -53,7 +67,7 @@ const Topside = () => {
                                 ResName={result["1. symbol"]}
                                 ResSrc={result["2. name"]}
                                 ResVal={result["8. currency"]}
-                                // ResCur={result["7. timezone"]}
+
                             />
                         ))}
                     </div>
