@@ -20,14 +20,12 @@ const Topside = () => {
             setShow(false);
         }
     }
-
     const fetchResults = async (keyword) => {
         const response = await Axios.get(
             `https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${keyword}&apikey=KHM0G6B8QHEQ0A02`
         );
         setResults(response.data.bestMatches.slice(0, 4));
     };
-
     useEffect(() => {
         if (inputValue) {
             fetchResults(inputValue);
@@ -39,13 +37,11 @@ const Topside = () => {
             <div className='greyBox'>
                 <div className='Heads'>
 
-                <HeaderContent Condition ="Up"/>
-                <HeaderContent Condition ="Down"/>
-                <HeaderContent Condition ="Down"/>
-                <HeaderContent Condition ="Up"/>
-                <HeaderContent Condition ="Down"/>
-
-
+                <HeaderContent CompanySymbol="AAPL"/>
+                <HeaderContent CompanySymbol="IBM"/>
+                <HeaderContent CompanySymbol="TSLA"/>
+                <HeaderContent CompanySymbol="MSFT"/>
+                <HeaderContent CompanySymbol="NFLX"/>
 
                 </div>
                 <a className={`ClickOut${show}`} onClick={ChangeStateTwo}></a>

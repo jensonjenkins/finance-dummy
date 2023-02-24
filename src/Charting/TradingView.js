@@ -30,7 +30,9 @@ export default function TradingViewWidget(props) {
       function createWidget() {
         if (document.getElementById(`tradingview${props.containerId}`) && 'TradingView' in window) {
           new window.TradingView.widget({
+
             autosize:true,
+            height:400,
             symbol: `NASDAQ:${props.CompanyTag}`,
             interval: "D",
             timezone: "Etc/UTC",
