@@ -1,8 +1,7 @@
 import Navbar from './components/Navbar/Navbar';
 import Topside from './components/Topside/Topside';
 import Views from './components/View/Views';
-
-import './App.css';
+import StockProfile from './pages/StockProfile';
 
 function App() {
   
@@ -11,10 +10,8 @@ function App() {
       <Navbar />
       <Topside></Topside>
       <Views></Views>
-      {/* <Home></Home> */}
 
-
-
+      {/* <StockProfile/> */}
     </>
   );
 }

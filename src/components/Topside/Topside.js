@@ -37,7 +37,7 @@ const Topside = () => {
             <div className='greyBox'>
                 <div className='Heads'>
 
-                <HeaderContent CompanySymbol="AAPL"/>
+                <HeaderContent CompanySymbol="HPE"/>
                 <HeaderContent CompanySymbol="IBM"/>
                 <HeaderContent CompanySymbol="TSLA"/>
                 <HeaderContent CompanySymbol="MSFT"/>

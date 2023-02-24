@@ -3,8 +3,7 @@ import { IoMdMenu } from 'react-icons/io'
 import { AiOutlineStock } from 'react-icons/ai'
 import { MdManageSearch } from 'react-icons/md'
 import { useState } from 'react'
-
-
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [show, setShow] = useState(false);
@@ -21,7 +20,9 @@ const Navbar = () => {
                 <a className='MenuLink' onClick={ChangeState}>
                     <IoMdMenu size={21} className='MenuIcon' />
                 </a>
-                <h1 className='TitleText'>Finance Dummy</h1>
+                <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <h1 className='TitleText'>Finance Dummy</h1>
+                </Link>
             </div>
 
             <a className={`clickOut${show}`} onClick={ChangeState} onScroll={ChangeState}></a>
@@ -33,7 +34,9 @@ const Navbar = () => {
 
                 <a className='HTLink'>
                     <AiOutlineStock size={23} className='icon' />
-                    <p className='MenuText'> Home</p>
+                    <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <p className='MenuText'> Home</p>
+                    </Link>
                 </a>
                 <a className='HTLink'>
                     <MdManageSearch size={23} className='icon' />

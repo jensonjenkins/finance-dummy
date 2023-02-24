@@ -1,0 +1,16 @@
+.greyBoxView{
+    margin-left:-10px;
+    margin-top: 0px;
+    width:100vw;
+    height:140px;
+    background-color: rgb(240, 240, 240);
+    z-index: -2;
+    padding-top: 69px;
+    display: flex;
+    /* padding-top: 60px; */
+    box-sizing: border-box;
+    flex-direction: column;
+    align-content: center;
+    justify-content: center;   
+    /* border: 1px solid black; */
+}

@@ -1,4 +1,3 @@
-
 import './ViewElement.css'
 import { useState, useEffect } from 'react'
 import Axios from 'axios'
@@ -15,22 +14,27 @@ const ViewElement = (props) => {
     let COMPANY_NAME = `${props.CompanySymbol}`;
   
     useEffect(() => {
-      const cachedData = JSON.parse(localStorage.getItem(COMPANY_NAME))
-      if (cachedData) {
-        setSymbol(cachedData['Global Quote']['01. symbol'])
-        setOpenVal(cachedData['Global Quote']['02. open'])
-        setActDiff(cachedData['Global Quote']['09. change'])
-        setPercDiff(cachedData['Global Quote']['10. change percent'])
-      } else {
-        Axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${COMPANY_NAME}&apikey=${API_KEY}`).then((response) => {
-          setSymbol(response.data['Global Quote']['01. symbol'])
-          setOpenVal(response.data['Global Quote']['02. open'])
-          setActDiff(response.data['Global Quote']['09. change'])
-          setPercDiff(response.data['Global Quote']['10. change percent'])
-          localStorage.setItem(COMPANY_NAME, JSON.stringify(response.data))
-        })
-      }
-    }, [])
+        const cachedData = JSON.parse(localStorage.getItem(COMPANY_NAME))
+        if (cachedData) {
+          setSymbol(cachedData['Global Quote']['01. symbol'])
+          setOpenVal(cachedData['Global Quote']['02. open'])
+          setActDiff(cachedData['Global Quote']['09. change'])
+          setPercDiff(cachedData['Global Quote']['10. change percent'])
+        }
+      
+        const interval = setInterval(() => {
+          Axios.get(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${COMPANY_NAME}&apikey=${API_KEY}`).then((response) => {
+            setSymbol(response.data['Global Quote']['01. symbol'])
+            setOpenVal(response.data['Global Quote']['02. open'])
+            setActDiff(response.data['Global Quote']['09. change'])
+            setPercDiff(response.data['Global Quote']['10. change percent'])
+            localStorage.setItem(COMPANY_NAME, JSON.stringify(response.data))
+          })
+        }, 600000) // refresh every 60 seconds
+      
+        return () => clearInterval(interval)
+      }, [])
+      
   
     useEffect(() => {
       if (percDiff[0] === '-') {

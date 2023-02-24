@@ -1,0 +1,94 @@
+.MainViewContainer {
+    width: 80vw;
+    height: 70vh;
+    margin-left: auto;
+    margin-right: auto;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+}
+
+.MainViewLeft {
+    width: 70%;
+    height: 100%;
+    /* border: 1px solid black; */
+}
+
+.MainViewRight {
+    width: 30%;
+    height: 100%;
+    margin-top: 20px;
+    box-sizing: border-box;
+    margin-left: 20px;
+    border: 1px solid RGB(220, 223, 227);
+    border-radius: 18px;
+    padding: 15px;
+    padding-top: 0px;
+}
+.MainViewTitle{
+    width: 100%;
+    height: 60px;
+    border-bottom: 1px solid RGB(220, 223, 227);
+    /* border: 1px solid black;; */
+    padding-top: 15px;
+    box-sizing: border-box
+}
+.MainViewStats{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+
+    /* border: 1px solid red; */
+}
+.MainCompName{
+    font-size: 25px;
+    font-weight: 100;
+    margin-top: 0px;
+}
+.ValueText{
+    margin-top: 0px;
+    font-size: 40px;
+    font-weight: 300;
+}
+.PercChangeCont{
+    box-sizing: border-box;
+    height: 35px;
+    width: 100px;
+    /* border: 1px solid black; */
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 15px;
+    margin-right: 15px;
+    background-color: rgb(230, 244, 234);
+}
+.PercChangeText{
+    font-size: 18px;
+    margin: 0px;
+    margin:auto;
+    color: RGB(25, 117, 54);
+}
+.ActDiffCont{
+    display: flex;
+    justify-content: center;
+    padding: auto;
+}
+.ActChangeText{
+    vertical-align: middle;
+    margin-top: auto;
+    margin-bottom: auto;
+    color: RGB(25, 117, 54)
+}
+.AboutText{
+    font-size: 16px;
+    font-weight: 100;
+}
+
+.AboutInfo{
+    font-size: 12px;
+    font-weight: 100;
+}

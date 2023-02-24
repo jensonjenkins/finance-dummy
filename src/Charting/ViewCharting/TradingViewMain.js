@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 
 let tvScriptLoadingPromise;
 
-export default function TradingViewWidget(props) {
+export default function TradingViewWidgetMain(props) {
   const onLoadScriptRef = useRef();
 
   
@@ -33,7 +33,7 @@ export default function TradingViewWidget(props) {
         if (document.getElementById(`tradingview${props.containerId}`)) {
           new window.TradingView.widget({
 
-            autosize: true,
+            autosize: false,
             width:820,
             height:350,
             symbol: `NASDAQ:${props.CompanyTag}`,
